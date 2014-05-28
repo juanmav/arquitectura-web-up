@@ -16,7 +16,7 @@
             <td>{{drop.name}}</td>
             <td>{{drop.ip_address}}</td>
             <td>{{drop.locked}}</td>
-            <td>{{drop.status}}</td>
+            <td><span class="label" ng-class="{ 'label-success' : drop.status == 'active', 'label-danger' : drop.status != 'active' }">{{drop.status}}</span></td>
             <td>
                 <button type="button" class="btn btn-sm btn-primary"
                         data-animation="am-flip-x"
