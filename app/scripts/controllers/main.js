@@ -8,51 +8,11 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
 
     DropletService.get({}, function (sucess) {
         console.log(sucess);
-        $scope.droplets = sucess.droplets;
+        $scope.droplets = sucess;
     }, function (error) {
         console.log(error);
-
-        $scope.droplets = [
-            {
-                "id": 874401,
-                "name": "CS-CloudHost",
-                "image_id": 1505447,
-                "size_id": 66,
-                "region_id": 4,
-                "backups_active": false,
-                "ip_address": "162.243.255.44",
-                "private_ip_address": null,
-                "locked": false,
-                "status": "active",
-                "created_at": "2013-12-17T15:19:37Z"
-            },
-            {
-                "id": 874402,
-                "name": "CS-CloudHost-2",
-                "image_id": 1505447,
-                "size_id": 66,
-                "region_id": 4,
-                "backups_active": false,
-                "ip_address": "162.243.255.45",
-                "private_ip_address": null,
-                "locked": false,
-                "status": "active",
-                "created_at": "2013-12-17T15:19:37Z"
-            },
-            {
-                "id": 874403,
-                "name": "CS-CloudHost-3",
-                "image_id": 1505447,
-                "size_id": 66,
-                "region_id": 4,
-                "backups_active": false,
-                "ip_address": "162.243.255.46",
-                "private_ip_address": null,
-                "locked": false,
-                "status": "inactive",
-                "created_at": "2013-12-17T15:19:37Z"
-            }
-        ]
+        $scope.droplets = [];
+        toaster.pop('error', "BackEnd", "No se pudo conectar al BackEnd");
     });
 
     $scope.dropdown = [
@@ -73,7 +33,6 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
         }
     ];
 
-
     $scope.click = function (drop) {
         console.log('me tocaron');
         console.log(drop.name);
@@ -89,6 +48,10 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
     var myOtherModal = $modal({scope: $scope, template: 'views/drop.tpl.modal.html', show: false});
     // Show when some event occurs (use $promise property to ensure the template has been loaded)
     $scope.showModal = function () {
+        myOtherModal.$promise.then(myOtherModal.show);
+    };
+
+    $scope.newServer = function () {
         myOtherModal.$promise.then(myOtherModal.show);
     };
 });

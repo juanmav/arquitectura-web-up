@@ -1,38 +1,48 @@
 <div class="container">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>name:</th>
-            <th>Ip</th>
-            <th>Locked</th>
-            <th>Active</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="drop in droplets">
-            <td>{{drop.id}}</td>
-            <td>{{drop.name}}</td>
-            <td>{{drop.ip_address}}</td>
-            <td>{{drop.locked}}</td>
-            <td><span class="label" ng-class="{ 'label-success' : drop.status == 'active', 'label-danger' : drop.status != 'active' }">{{drop.status}}</span></td>
-            <td>
-                <button type="button" class="btn btn-sm btn-primary"
-                        data-animation="am-flip-x"
-                        bs-dropdown="dropdown">
-                    <span class="glyphicon glyphicon-edit"></span>
-                </button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Lista de Servidores
+            <button ng-click="newServer()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus">
 
-</div>
+            </button>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>name:</th>
+                    <th>Ip</th>
+                    <th>Active</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="drop in droplets">
+                    <td>{{drop.id}}</td>
+                    <td>{{drop.name}}</td>
+                    <td>{{drop.ip}}</td>
+                    <td>
+                        <span class="label" ng-class="{ 'label-success' : drop.status, 'label-danger' : !drop.status }">{{drop.status}}</span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-primary"
+                                data-animation="am-flip-x"
+                                bs-dropdown="dropdown">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-<div class="row marketing">
-    <h4>Ejemplo de uso de API Digital Ocean</h4>
-    <p>
-        Esta es una mini App Web que demuestra la utilizacion de AngulaJS utilizando servicios RESTFul
-    </p>
+        </div>
+        <div class="panel-footer">
+            <p>Ejemplo de uso de API Ruby on Rails con cliente AngularJS</p>
+            <p>
+               <small> Esta es una mini App Web que demuestra la utilizacion de AngulaJS utilizando servicios RESTFul</small>
+            </p>
+        </div>
+    </div>
+
 </div>

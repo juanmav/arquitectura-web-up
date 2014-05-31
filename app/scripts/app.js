@@ -18,9 +18,14 @@ app.config(function ($routeProvider) {
     });
 });
 
+app.config(function($httpProvider){
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common["X-Requested-With"];
+});
+
 // Configuracion de DropDowns
 app.config(function ($dropdownProvider) {
     angular.extend($dropdownProvider.defaults, {
         html: true
     });
-})
+});
