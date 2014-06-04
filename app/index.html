@@ -13,25 +13,26 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-additions/dist/bootstrap-additions.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="arqWebApp" class="container">
+  <body ng-app="arqWebApp" class="">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-include="'views/header.html'"></div>
+    <!-- <div ng-include="'views/header.html'"></div>-->
 
     <!-- Configuracion Global del Toast. -->
     <toaster-container toaster-options="{'position-class': 'toast-bottom-right'}"></toaster-container>
     <!-- Add your site or application content here -->
     <div ng-view=""></div>
 
-    <div ng-include="'views/footer.html'"></div>
+    <!-- <div ng-include="'views/footer.html'"></div> -->
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -58,6 +59,8 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/services/droplet-service.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/flights.js"></script>
+        <script src="scripts/directives/ngdraggable.js"></script>
         <!-- endbuild -->
 </body>
 </html>

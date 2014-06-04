@@ -12,13 +12,17 @@ app.config(function ($routeProvider) {
     }).when('/contact', {
         templateUrl: 'views/contact.html',
         controller: ''
+    }).when('/flights', {
+        templateUrl: 'views/flights.html',
+        controller: 'FlightsCtrl'
     }).otherwise({
         templateUrl: '404.html',
         controller: ''
     });
-});
+})
+;
 
-app.config(function($httpProvider){
+app.config(function ($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common["X-Requested-With"];
 });

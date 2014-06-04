@@ -1,0 +1,89 @@
+<div class="container">
+    <div class="row">
+        <h2>Skydive Chascomus - Manifiesto BETA</h2>
+        <button ng-click="newFligth()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus">
+
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div ng-repeat="fligth in fligths"
+                 class="panel panel-info"
+                 style="width: 200px; float: left"
+                 ng-drop="true" ng-drop-success="onDropComplete($data,fligth)">
+                <div class="panel-heading">
+                    {{fligth.id}}
+                    <button type="button" class="btn btn-sm btn-danger pull-right"
+                            data-animation="am-flip-x"
+                            bs-dropdown="dropdown">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <h4><img width="25" height="25" src="https://cdn4.iconfinder.com/data/icons/ios7-line-strategy-2/512/parachute-512.png">Flyers</h4>
+                    <div class="list-group">
+                        <a class="list-group-item" ng-repeat="skydiver in fligth.skydivers track by $index">
+                            <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
+                            <small>{{skydiver.name}}</small>
+                        </a>
+                    </div>
+                    <h4><span class="glyphicon glyphicon-user"></span> Pilot</h4>
+                    <a class="btn btn-default" ng-show="fligth.pilot.name">
+                        <span class="glyphicon glyphicon-user"> {{fligth.pilot.name}} </span>
+                    </a>
+
+                    <h4><span class="glyphicon glyphicon-plane"></span> Avion</h4>
+                    <a class="btn btn-default" ng-show="fligth.plane.name">
+                        <span class="glyphicon glyphicon-plane"> {{fligth.plane.name}} </span>
+                    </a>
+                </div>
+                <div class="panel-footer">
+                    Estado: Preparando
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <h4>Paracas</h4>
+                <div class="list-group" style="height: 200px; overflow-y: scroll;">
+                    <a ng-drag="true"  ng-drag-data="skydiver"
+                        class="btn btn-default" style="width: 200px" ng-repeat="skydiver in skydivers">
+                        <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
+                        <p>
+                            {{skydiver.name}}
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Pilots</h4>
+                <div class="list-group">
+                    <a ng-drag="true"  ng-drag-data="pilot"
+                       class="btn btn-default" ng-repeat="pilot in pilots">
+                        <span class="glyphicon glyphicon-user"> {{pilot.name}} </span>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Aviones</h4>
+                <div class="list-group">
+                    <a ng-drag="true"  ng-drag-data="plane"
+                       class="btn btn-default" ng-repeat="plane in planes">
+                        <span class="glyphicon glyphicon-plane"> {{plane.name}} </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <a class="pull-right"  href="https://www.facebook.com/juanmav82">
+            <img width="20" height="20" class="img-circle" src="http://lh6.googleusercontent.com/-6L0MugQhHMQ/AAAAAAAAAAI/AAAAAAAAAAA/9keAyyKs5oE/s32-c/photo.jpg" style="float:left;margin-right: 10px;">
+            <small>Juan Manuel Vicente</small>
+        </a>
+        <p class="pull-right">Powered by: </p>
+
+    </div>
+
+</div>
