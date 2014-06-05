@@ -1,52 +1,59 @@
-<div class="container">
-    <div class="row">
-        <h2>Skydive Chascomus - Manifiesto BETA</h2>
-        <button ng-click="newFligth()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus">
-
-        </button>
+<div class="panel panel-info">
+    <div class="panel-heading clearfix">
+        <h1 class="panel-title pull-left">Skydive Chascomus - Manifiesto BETA</h1>
+        <span ng-click="newFligth()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus">
+        </span>
     </div>
-    <div class="row">
-        <div class="col-md-8">
+    <div class="panel-body">
+        <div class="col-md-9" style="height: 679px; overflow-y: scroll;">
             <div ng-repeat="fligth in fligths"
                  class="panel panel-info"
-                 style="width: 200px; float: left"
+                 style="width: 150px; float: left; margin-right: 10px"
                  ng-drop="true" ng-drop-success="onDropComplete($data,fligth)">
-                <div class="panel-heading">
-                    {{fligth.id}}
+                <div class="panel-heading clearfix">
+                    <div class="pull-left">
+                        <span class="h3"># {{fligth.id}} </span> </br>
+                        <small>{{fligth.altitude}} pies</small>
+                    </div>
                     <button type="button" class="btn btn-sm btn-danger pull-right"
                             data-animation="am-flip-x"
                             bs-dropdown="dropdown">
                         <span class="glyphicon glyphicon-edit"></span>
                     </button>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="height: 402px">
                     <h4><img width="25" height="25" src="https://cdn4.iconfinder.com/data/icons/ios7-line-strategy-2/512/parachute-512.png">Flyers</h4>
                     <div class="list-group">
-                        <a class="list-group-item" ng-repeat="skydiver in fligth.skydivers track by $index">
+                        <div class="list-group-item" ng-repeat="skydiver in fligth.skydivers track by $index">
                             <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
                             <small>{{skydiver.name}}</small>
-                        </a>
+                            <span class="glyphicon glyphicon-remove-circle pull-right" ng-click="removeFromFlight(skydiver,fligth)"></span>
+                        </div>
                     </div>
                     <h4><span class="glyphicon glyphicon-user"></span> Pilot</h4>
                     <a class="btn btn-default" ng-show="fligth.pilot.name">
-                        <span class="glyphicon glyphicon-user"> {{fligth.pilot.name}} </span>
+                        <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
+                        <small>{{fligth.pilot.name}}</small>
+                        <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePilotFromFlight(fligth)"></i>
                     </a>
 
                     <h4><span class="glyphicon glyphicon-plane"></span> Avion</h4>
                     <a class="btn btn-default" ng-show="fligth.plane.name">
-                        <span class="glyphicon glyphicon-plane"> {{fligth.plane.name}} </span>
+                        <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
+                        <small>{{fligth.plane.name}}</small>
+                        <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePlaneFromFlight(fligth)"></i>
                     </a>
                 </div>
                 <div class="panel-footer">
-                    Estado: Preparando
+                    <small>Estado: {{fligth.status.name}}</small>
                 </div>
 
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="row">
+        <div class="col-md-3">
+            <div class="row pull-right">
                 <h4>Paracas</h4>
-                <div class="list-group" style="height: 200px; overflow-y: scroll;">
+                <div class="list-group" style="height: 300px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="skydiver"
                         class="btn btn-default" style="width: 200px" ng-repeat="skydiver in skydivers">
                         <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
@@ -56,29 +63,36 @@
                     </a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row pull-right">
                 <h4>Pilots</h4>
-                <div class="list-group">
+                <div class="list-group" style="height: 100px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="pilot"
-                       class="btn btn-default" ng-repeat="pilot in pilots">
-                        <span class="glyphicon glyphicon-user"> {{pilot.name}} </span>
+                       class="btn btn-default" style="width: 200px" ng-repeat="pilot in pilots">
+                        <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
+                        <p>
+                            {{pilot.name}}
+                        </p>
                     </a>
                 </div>
             </div>
-            <div class="row">
+            <div class="row pull-right">
                 <h4>Aviones</h4>
-                <div class="list-group">
+                <div class="list-group" style="width: 217px;">
                     <a ng-drag="true"  ng-drag-data="plane"
-                       class="btn btn-default" ng-repeat="plane in planes">
-                        <span class="glyphicon glyphicon-plane"> {{plane.name}} </span>
+                       class="btn btn-default" style="width: 200px" ng-repeat="plane in planes">
+                        <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
+                        <p>
+                            {{plane.name}}
+                        </p>
+
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <a class="pull-right"  href="https://www.facebook.com/juanmav82">
+    <div class="panel-footer clearfix">
+        <a class="pull-right"  href="https://www.facebook.com/juanmav82" target="_blank">
             <img width="20" height="20" class="img-circle" src="http://lh6.googleusercontent.com/-6L0MugQhHMQ/AAAAAAAAAAI/AAAAAAAAAAA/9keAyyKs5oE/s32-c/photo.jpg" style="float:left;margin-right: 10px;">
             <small>Juan Manuel Vicente</small>
         </a>

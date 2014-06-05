@@ -6,27 +6,27 @@ app.controller('FlightsCtrl', function ($scope) {
     $scope.skydivers = [
         {
             id: 1,
-            name: "JM",
+            name: "Jay Cool",
             typeObj: 1
         },
         {
             id: 2,
-            name: "Jay",
+            name: "Chino",
             typeObj: 1
         },
         {
             id: 3,
-            name: "Chinahh",
+            name: "Santi",
             typeObj: 1
         },
         {
             id: 4,
-            name: "Papelucho",
+            name: "Lucho",
             typeObj: 1
         },
         {
             id: 5,
-            name: "Rubilon",
+            name: "Rubio",
             typeObj: 1
         }
 
@@ -35,12 +35,12 @@ app.controller('FlightsCtrl', function ($scope) {
     $scope.pilots = [
         {
             id: 1,
-            name: "Palo",
+            name: "Lucas",
             typeObj: 2
         },
         {
             id: 2,
-            name: "Ese pibe, el nuevo",
+            name: "Andres",
             typeObj: 2
 
         }
@@ -69,7 +69,9 @@ app.controller('FlightsCtrl', function ($scope) {
             id: 1,
             skydivers: [],
             pilot: {},
-            plane: {}
+            plane: {},
+            altitude : 12000,
+            status : { id: 1, name : "Preparando..." }
         }
 
     ];
@@ -90,16 +92,32 @@ app.controller('FlightsCtrl', function ($scope) {
         }
     }
 
-    $scope.newFligth = function(){
+    $scope.newFligth = function () {
         console.log($scope.fligths.length);
 
         var fligth = {};
-
         fligth.id = $scope.fligths.length + 1;
-
+        fligth.pilot = {};
+        fligth.skydivers = [];
+        fligth.plane = {};
+        fligth.altitude = 12000;
+        fligth.status = { id : 1, name : "Preparando..."};
         $scope.fligths.push(fligth);
+    };
 
-    }
+    $scope.removeFromFlight = function (skydiver, flight) {
+        // Se agrego el comportamiento en el protype de Array.
+        // arrayprotoype.js
+        flight.skydivers.removeItem(skydiver);
+    };
+
+    $scope.removePilotFromFlight = function (flight){
+        flight.pilot ={};
+    };
+
+    $scope.removePlaneFromFlight = function(flight){
+        flight.plane = {};
+    };
 
     $scope.dropdown = [
         {
