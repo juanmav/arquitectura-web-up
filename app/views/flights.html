@@ -1,19 +1,26 @@
 <div class="panel panel-info">
     <div class="panel-heading clearfix">
         <h1 class="panel-title pull-left">Skydive Chascomus - Manifiesto BETA</h1>
-        <span ng-click="newFligth()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus">
+        <span ng-click="newFlight()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus">
         </span>
     </div>
     <div class="panel-body">
         <div class="col-md-9" style="height: 679px; overflow-y: scroll;">
-            <div ng-repeat="fligth in fligths"
-                 class="panel panel-info"
-                 style="width: 150px; float: left; margin-right: 10px"
-                 ng-drop="true" ng-drop-success="onDropComplete($data,fligth)">
+            <div ng-repeat="flight in flights"
+                 class="panel"
+                 ng-class="{'panel-info' : flight.status.id == 1,
+                 'panel-warning' : flight.status.id == 2,
+                 'panel-danger' : flight.status.id == 3,
+                 'panel-primary' : flight.status.id == 4,
+                 'panel-success' : flight.status.id == 5}"
+                 style="width: 200px; float: left; margin-right: 10px"
+                 ng-drop="true" ng-drop-success="onDropComplete($data,flight)">
                 <div class="panel-heading clearfix">
                     <div class="pull-left">
-                        <span class="h3"># {{fligth.id}} </span> </br>
-                        <small>{{fligth.altitude}} pies</small>
+                        <span class="h3"># {{flight.day_order}} </span> <small>id: {{flight.id}}</small></br>
+                        <small ng-click="edit = true" ng-hide="edit">{{flight.altitude}} pies</small>
+                        <input ng-show="edit" ng-model="flight.altitude" type="number" style="width: 60px; font-size: 12px"/>
+                        <i ng-show="edit" class="glyphicon glyphicon-ok" ng-click="edit = false"></i>
                     </div>
                     <button type="button" class="btn btn-sm btn-danger pull-right"
                             data-animation="am-flip-x"
@@ -24,44 +31,45 @@
                 <div class="panel-body" style="height: 402px">
                     <h4><img width="25" height="25" src="https://cdn4.iconfinder.com/data/icons/ios7-line-strategy-2/512/parachute-512.png">Flyers</h4>
                     <div class="list-group">
-                        <div class="list-group-item" ng-repeat="skydiver in fligth.skydivers track by $index">
+                        <div class="list-group-item" ng-repeat="skydiver in flight.skydivers track by $index">
                             <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
                             <small>{{skydiver.name}}</small>
-                            <span class="glyphicon glyphicon-remove-circle pull-right" ng-click="removeFromFlight(skydiver,fligth)"></span>
+                            <span class="glyphicon glyphicon-remove-circle pull-right" ng-click="removeFromFlight(skydiver,flight)"></span>
                         </div>
                     </div>
                     <h4><span class="glyphicon glyphicon-user"></span> Pilot</h4>
-                    <a class="btn btn-default" ng-show="fligth.pilot.name">
+                    <a class="btn btn-default" ng-show="flight.pilot.name">
                         <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
-                        <small>{{fligth.pilot.name}}</small>
-                        <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePilotFromFlight(fligth)"></i>
+                        <small>{{flight.pilot.name}}</small>
+                        <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePilotFromFlight(flight)"></i>
                     </a>
 
                     <h4><span class="glyphicon glyphicon-plane"></span> Avion</h4>
-                    <a class="btn btn-default" ng-show="fligth.plane.name">
+                    <a class="btn btn-default" ng-show="flight.plane.domain">
                         <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
-                        <small>{{fligth.plane.name}}</small>
-                        <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePlaneFromFlight(fligth)"></i>
+                        <small>{{flight.plane.domain}}</small>
+                        <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePlaneFromFlight(flight)"></i>
                     </a>
                 </div>
                 <div class="panel-footer">
-                    <small>Estado: {{fligth.status.name}}</small>
+                    <small>Estado: {{flight.status.name}}</small>
                 </div>
 
             </div>
         </div>
         <div class="col-md-3">
             <div class="row pull-right">
-                <h4>Paracas</h4>
+                <h4 >Paracas: </h4>
                 <div class="list-group" style="height: 300px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="skydiver"
-                        class="btn btn-default" style="width: 200px" ng-repeat="skydiver in skydivers">
+                        class="btn btn-default" style="width: 200px" ng-repeat="skydiver in skydivers | filter:{ name: filter.name }">
                         <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
                         <p>
                             {{skydiver.name}}
                         </p>
                     </a>
                 </div>
+                <small>Filtrar: <input type="text" ng-model="filter.name"></small>
             </div>
             <div class="row pull-right">
                 <h4>Pilots</h4>
@@ -82,7 +90,7 @@
                        class="btn btn-default" style="width: 200px" ng-repeat="plane in planes">
                         <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
                         <p>
-                            {{plane.name}}
+                            {{plane.domain}}
                         </p>
 
                     </a>
