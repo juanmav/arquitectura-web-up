@@ -1,11 +1,10 @@
 'use strict';
 
 var app = angular.module('arqWebApp');
-app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, PlaneService, toaster) {
+app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, PlaneService, toaster, FlightService) {
 
-    //$scope.skydivers = [];
 
-    SkydiverService.get({}, function (sucess) {
+    SkydiverService.query({}, function (sucess) {
         console.log(sucess);
         $scope.skydivers = sucess;
         markTypeObject($scope.skydivers, 1);
@@ -15,7 +14,7 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
         toaster.pop('error', "Skydivers", "No se pudo conectar al BackEnd");
     });
 
-    PilotService.get({}, function (sucess) {
+    PilotService.query({}, function (sucess) {
         console.log(sucess);
         $scope.pilots = sucess;
         markTypeObject($scope.pilots, 2);
@@ -25,7 +24,7 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
         toaster.pop('error', "Pilots", "No se pudo conectar al BackEnd");
     });
 
-    PlaneService.get({}, function (sucess) {
+    PlaneService.query({}, function (sucess) {
         console.log(sucess);
         $scope.planes = sucess;
         markTypeObject($scope.planes, 3);
@@ -35,25 +34,22 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
         toaster.pop('error', "Planes", "No se pudo conectar al BackEnd");
     });
 
+    FlightService.query({}, function (sucess) {
+        console.log(sucess);
+        $scope.flights = sucess;
+    }, function (error) {
+        console.log(error);
+        toaster.pop('error', "Vuelos", "No se pudo conectar al BackEnd");
+    });
+
+
+
     // Esto marca el tipo de objeto (Skydiver/Pilot/Plane) para el drag-&-drop
     function markTypeObject(values, mark){
         angular.forEach(values, function(value, key) {
             value.typeObj = mark;
         });
     }
-
-    $scope.flights = [
-        {
-            id: undefined,
-            day_order : 1,
-            skydivers: [],
-            pilot: {},
-            plane: {},
-            altitude : 12000,
-            status : { id: 1, name : "Preparando..." }
-        }
-
-    ];
 
     $scope.call = function (flight){
         flight.status = { id: 2, name : "5 min...!" }
@@ -123,14 +119,25 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
                 if (flight.skydivers.indexOf(data) == -1) {
                     flight.skydivers.push(data)
                 }
+                $scope.updateFlight(flight);
                 break;
             case 2:
-                flight.pilot = data;
+                flight.pilots[0] = data;
+                $scope.updateFlight(flight);
                 break;
             case 3:
-                flight.plane = data;
+                flight.planes[0] = data;
+                $scope.updateFlight(flight);
                 break;
         }
+    }
+
+    $scope.updateFlight = function(flight){
+        FlightService.update(flight, function(success){
+            console.log(success);
+        }, function(error){
+            console.log(error);
+        });
     }
 
     $scope.newFlight = function () {
@@ -139,12 +146,13 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
 
         var flight = {};
         flight.day_order = $scope.flights.length + 1;
-        flight.pilot = {};
-        flight.skydivers = [];
-        flight.plane = {};
         flight.altitude = 12000;
-        flight.status = { id : 1, name : "Preparando..."};
-        $scope.flights.push(flight);
+        FlightService.save(flight, function(success){
+            console.log(success);
+            $scope.flights.push(success);
+        }, function(error){
+            console.log(error);
+        });
     };
 
     $scope.removeFromFlight = function (skydiver, flight) {
@@ -154,16 +162,12 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
     };
 
     $scope.removePilotFromFlight = function (flight){
-        flight.pilot ={};
+        flight.pilots = [];
     };
 
     $scope.removePlaneFromFlight = function(flight){
-        flight.plane = {};
+        flight.planes = [];
     };
-
-    $scope.selectAltitude = function (flight){
-
-    }
 
     $scope.dropdown = [
         {

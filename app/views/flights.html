@@ -38,16 +38,16 @@
                         </div>
                     </div>
                     <h4><span class="glyphicon glyphicon-user"></span> Pilot</h4>
-                    <a class="btn btn-default" ng-show="flight.pilot.name">
+                    <a class="btn btn-default" ng-show="flight.pilots[0].name">
                         <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
-                        <small>{{flight.pilot.name}}</small>
+                        <small>{{flight.pilots[0].name}}</small>
                         <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePilotFromFlight(flight)"></i>
                     </a>
 
                     <h4><span class="glyphicon glyphicon-plane"></span> Avion</h4>
-                    <a class="btn btn-default" ng-show="flight.plane.domain">
+                    <a class="btn btn-default" ng-show="flight.planes[0].domain">
                         <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
-                        <small>{{flight.plane.domain}}</small>
+                        <small>{{flight.planes[0].domain}}</small>
                         <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePlaneFromFlight(flight)"></i>
                     </a>
                 </div>
