@@ -6,22 +6,30 @@
                 <h4 class="modal-title" ng-bind-html="title"></h4>
             </div>
             <div class="modal-body">
+            ------{{theNewServer}}/////////
+                <form role="form">
+                    <div clas s="form-group">
+                      <label  for="name">Name</label>
+                      <input  ng-model="theNewServer.name" type="text" class="form-control" id="name">
+                  </div>
+                  <div class="form-group">
+                      <label for="ip">IP</label>
+                      <input ng-model="theNewServer.ip" type="text" class="form-control" id="ip">
+                  </div>
+                  <div class="checkbox">
+                      <label>
+                          <input ng-model="theNewServer.status" type="checkbox"> Status
+                      </label>
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              
 
-                <h4>Text in a modal</h4>
-                <p ng-bind-html="content"></p>
-                <pre>2 + 3 = {{ 2 + 3 }}</pre>
-
-                <h4>Popover in a modal</h4>
-                <p>This <a href="#" role="button" class="btn btn-default popover-test" data-title="A Title" data-content="And here's some amazing content. It's very engaging. right?" bs-popover>button</a> should trigger a popover on click.</p>
-
-                <h4>Tooltips in a modal</h4>
-                <p><a href="#" class="tooltip-test" data-title="Tooltip" bs-tooltip>This link</a> and <a href="#" class="tooltip-test" data-title="Tooltip" bs-tooltip>that link</a> should have tooltips on hover.</p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
-                <button type="button" class="btn btn-primary" ng-click="$hide()">Save changes</button>
-            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="salvame()">Save changes</button>
         </div>
     </div>
+</div>
 </div>

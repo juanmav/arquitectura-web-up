@@ -4,14 +4,29 @@ var app = angular.module('arqWebApp');
 
 app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
 
-    $scope.droplets = {};
+    $scope.droplets = [];
+
 
     DropletService.get({}, function (sucess) {
         console.log(sucess);
         $scope.droplets = sucess;
     }, function (error) {
         console.log(error);
-        $scope.droplets = [];
+        $scope.droplets = [ 
+        {   
+            "id" : 1, 
+            "name" : "Pepe",  
+            "ip" : "192.168.0.1",  
+            "status" : "true"
+        },
+        {   
+            "id" : 2, 
+            "name" : "Pedro",  
+            "ip" : "192.168.0.10",  
+            "status" : "false"
+        }
+
+        ];
         toaster.pop('error', "BackEnd", "No se pudo conectar al BackEnd");
     });
 
@@ -21,8 +36,8 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
             "click": "click(drop)"
         },
         {
-            "text": "Display an Modal",
-            "click": "showModal()"
+            "text": "New Server",
+            "click": "newServer()"
         },
         {
             "divider": true
@@ -43,15 +58,39 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
         //toaster.pop('note', "title", "text");
 
     }
+    
+    $scope.$watch('nombre', function() {
+       console.log('cambie nombre')
+    });
 
-    // Pre-fetch an external template populated with a custom scope
-    var myOtherModal = $modal({scope: $scope, template: 'views/drop.tpl.modal.html', show: false});
-    // Show when some event occurs (use $promise property to ensure the template has been loaded)
     $scope.showModal = function () {
+        // Pre-fetch an external template populated with a custom scope
+        var myOtherModal = $modal({scope: $scope, template: 'views/drop.tpl.modal.html', show: false});
+        // Show when some event occurs (use $promise property to ensure the template has been loaded)    
         myOtherModal.$promise.then(myOtherModal.show);
     };
 
     $scope.newServer = function () {
+        $scope.theNewServer = { 'name' : 'pepe'};
+        // Pre-fetch an external template populated with a custom scope
+        var myOtherModal = $modal({scope: $scope, template: 'views/drop.tpl.modal.html', show: false});
+        // Show when some event occurs (use $promise property to ensure the template has been loaded)
         myOtherModal.$promise.then(myOtherModal.show);
     };
+
+    $scope.mostrame = function(){
+        console.log($scope.persona);
+        DropletService.save($scope.person,function(success){
+            toaster.pop('success', "Persona Salvada", "Para que esta funcionalidad haga algo!");
+        }, function(error){
+            toaster.pop('warning', "Falle", "Para que esta funcionalidad haga algo!");
+        });
+    }
+
+    // Esta funcion se llamma desde el modal de New Server
+    $scope.salvame = function(){
+        console.log('salvando');
+        console.log($scope.theNewServer);
+    }
+
 });
