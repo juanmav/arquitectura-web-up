@@ -3,7 +3,7 @@
 var app = angular.module('arqWebApp',
     [ 'ngResource', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap', 'toaster']);
 app.config(function ($routeProvider) {
-    $routeProvider.when('/', {
+    $routeProvider.when('/main', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
     }).when('/about', {
@@ -12,7 +12,7 @@ app.config(function ($routeProvider) {
     }).when('/contact', {
         templateUrl: 'views/contact.html',
         controller: ''
-    }).when('/flights', {
+    }).when('/', {
         templateUrl: 'views/flights.html',
         controller: 'FlightsCtrl'
     }).otherwise({

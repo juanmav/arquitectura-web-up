@@ -1,8 +1,8 @@
 <div class="panel panel-info">
     <div class="panel-heading clearfix">
         <h1 class="panel-title pull-left">Skydive Chascomus - Manifiesto BETA</h1>
-        <span ng-click="newFlight()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus">
-        </span>
+        <span ng-click="report()" class="btn btn-sm btn-warning pull-right glyphicon glyphicon-search"> </span>
+        <span ng-click="newFlight()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus"> </span>
     </div>
     <div class="panel-body">
         <div class="col-md-9" style="height: 679px; overflow-y: scroll;">
@@ -20,7 +20,7 @@
                         <span class="h3"># {{flight.day_order}} </span> <small>id: {{flight.id}}</small></br>
                         <small ng-click="edit = true" ng-hide="edit">{{flight.altitude}} pies</small>
                         <input ng-show="edit" ng-model="flight.altitude" type="number" style="width: 60px; font-size: 12px"/>
-                        <i ng-show="edit" class="glyphicon glyphicon-ok" ng-click="edit = false"></i>
+                        <i ng-show="edit" class="glyphicon glyphicon-ok" ng-click="edit = false; updateFlight(flight)"></i>
                     </div>
                     <button type="button" class="btn btn-sm btn-danger pull-right"
                             data-animation="am-flip-x"
@@ -73,7 +73,7 @@
             </div>
             <div class="row pull-right">
                 <h4>Pilots</h4>
-                <div class="list-group" style="height: 100px; width: 217px; overflow-y: scroll;">
+                <div class="list-group" style="height: 150px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="pilot"
                        class="btn btn-default" style="width: 200px" ng-repeat="pilot in pilots">
                         <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
@@ -85,7 +85,7 @@
             </div>
             <div class="row pull-right">
                 <h4>Aviones</h4>
-                <div class="list-group" style="width: 217px;">
+                <div class="list-group" style="height: 150px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="plane"
                        class="btn btn-default" style="width: 200px" ng-repeat="plane in planes">
                         <img width="30" height="30" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">

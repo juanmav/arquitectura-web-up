@@ -1,0 +1,33 @@
+<div class="modal" ng-controller="ReportSkydiversFligthsCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="$hide()">&times;</button>
+                <h4 class="modal-title">Detalle del dia <small class="pull-right">Filtrar: <input type="text" ng-model="filter.name"></small></h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Skydiver</th>
+                        <th>Altitude:</th>
+                        <th>Count:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="report in reports | filter:{ name: filter.name }">
+                        <td>{{report.name}}</td>
+                        <td>{{report.altitude}}</td>
+                        <td>{{report.count}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
