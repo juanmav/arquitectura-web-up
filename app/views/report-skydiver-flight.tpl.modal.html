@@ -3,7 +3,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" ng-click="$hide()">&times;</button>
-                <h4 class="modal-title">Detalle del dia <small class="pull-right">Filtrar: <input type="text" ng-model="filter.name"></small></h4>
+                <h4 class="modal-title">Detalle del dia: {{filter.selectedDate | date: 'dd/MM/yyyy'}}
+                    <small class="pull-right">
+                        Filtrar: <input type="text" ng-model="filter.name">
+                    </small>
+                    <small class="pull-right">
+                        Fecha: <input type="text" ng-model="filter.selectedDate" bs-datepicker>
+                    </small>
+                </h4>
             </div>
             <div class="modal-body">
                 <table class="table table-striped">
