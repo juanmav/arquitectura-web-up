@@ -1,8 +1,8 @@
 <div class="panel panel-info">
     <div class="panel-heading clearfix">
         <h1 class="panel-title pull-left">Skydive Chascomus - Manifiesto BETA</h1>
-        <span ng-click="report()" class="btn btn-sm btn-warning pull-right glyphicon glyphicon-search"> </span>
-        <span ng-click="newFlight()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus"> </span>
+        <span ng-click="report()" class="btn btn-sm btn-warning pull-right glyphicon glyphicon-search" bs-tooltip="'Reporte'"> </span>
+        <span ng-click="newFlight()" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus" bs-tooltip="'Nuevo Vuelo'"> </span>
     </div>
     <div class="panel-body">
         <div class="col-md-9" style="height: 679px; overflow-y: scroll;">
@@ -38,18 +38,18 @@
                         </div>
                     </div>
                     <h4><span class="glyphicon glyphicon-user"></span> Pilot</h4>
-                    <a class="btn btn-default" ng-show="flight.pilots[0].name">
+                    <div class="list-group-item" ng-show="flight.pilots[0].name">
                         <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
                         <small>{{flight.pilots[0].name}}</small>
                         <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePilotFromFlight(flight)"></i>
-                    </a>
+                    </div>
 
                     <h4><span class="glyphicon glyphicon-plane"></span> Avion</h4>
-                    <a class="btn btn-default" ng-show="flight.planes[0].domain">
+                    <div class="list-group-item" ng-show="flight.planes[0].domain">
                         <img width="20" height="20" class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left;margin-right: 10px;">
                         <small>{{flight.planes[0].domain}}</small>
                         <i class="glyphicon glyphicon-remove-circle pull-right" ng-click="removePlaneFromFlight(flight)"></i>
-                    </a>
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <small>Estado: {{flight.status.name}}</small>
@@ -59,7 +59,9 @@
         </div>
         <div class="col-md-3">
             <div class="row pull-right">
-                <h4 >Paracas: </h4>
+                <h4 >Paracas:
+                    <a ng-href="{{skydiversURL}}"  target="_blank" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus" bs-tooltip="'Agregar Skydiver'"> </a>
+                </h4>
                 <div class="list-group" style="height: 300px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="skydiver"
                         class="btn btn-default" style="width: 200px" ng-repeat="skydiver in skydivers | filter:{ name: filter.name }">
@@ -72,7 +74,9 @@
                 <small>Filtrar: <input type="text" ng-model="filter.name"></small>
             </div>
             <div class="row pull-right">
-                <h4>Pilots</h4>
+                <h4>Pilots
+                    <a ng-href="{{pilotsURL}}" target="_blank" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus" bs-tooltip="'Agregar Piloto'"> </a>
+                </h4>
                 <div class="list-group" style="height: 150px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="pilot"
                        class="btn btn-default" style="width: 200px" ng-repeat="pilot in pilots">
@@ -84,7 +88,9 @@
                 </div>
             </div>
             <div class="row pull-right">
-                <h4>Aviones</h4>
+                <h4>Aviones
+                    <a ng-href="{{planesURL}}" target="_blank" class="btn btn-sm btn-success pull-right glyphicon glyphicon-plus" bs-tooltip="'Agregar Avion'"> </a>
+                </h4>
                 <div class="list-group" style="height: 150px; width: 217px; overflow-y: scroll;">
                     <a ng-drag="true"  ng-drag-data="plane"
                        class="btn btn-default" style="width: 200px" ng-repeat="plane in planes">

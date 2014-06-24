@@ -3,6 +3,10 @@
 var app = angular.module('arqWebApp');
 app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, PlaneService, toaster, FlightService, $modal) {
 
+    $scope.skydiversURL = 'http://' + window.location.hostname + ':3000/skydivers/';
+    $scope.planesURL = 'http://' + window.location.hostname + ':3000/planes/';
+    $scope.pilotsURL = 'http://' + window.location.hostname + ':3000/pilots/';
+
     SkydiverService.query({}, function (sucess) {
         $scope.skydivers = sucess;
         markTypeObject($scope.skydivers, 1);
