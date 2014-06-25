@@ -6,30 +6,31 @@
                 <h4 class="modal-title" ng-bind-html="title"></h4>
             </div>
             <div class="modal-body">
-            ------{{theNewServer}}/////////
+                ------{{drop}}/////////
                 <form role="form">
+                    <div class="form-group" ng-show="drop.id">
+                        <label  for="id">ID</label>
+                        <input  ng-model="drop.id" type="text" class="form-control" id="id" ng-disabled="true">
+                    </div>
                     <div clas s="form-group">
-                      <label  for="name">Name</label>
-                      <input  ng-model="theNewServer.name" type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                      <label for="ip">IP</label>
-                      <input ng-model="theNewServer.ip" type="text" class="form-control" id="ip">
-                  </div>
-                  <div class="checkbox">
-                      <label>
-                          <input ng-model="theNewServer.status" type="checkbox"> Status
-                      </label>
-                  </div>
-                  <button type="submit" class="btn btn-default">Submit</button>
-              </form>
-              
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
-            <button type="button" class="btn btn-primary" ng-click="salvame()">Save changes</button>
+                        <label  for="name">Name</label>
+                        <input  ng-model="drop.name" type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="ip">IP</label>
+                        <input ng-model="drop.ip" type="text" class="form-control" id="ip">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input ng-model="drop.status" type="checkbox"> Status
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="save(drop)">Save changes</button>
+            </div>
         </div>
     </div>
-</div>
 </div>

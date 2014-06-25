@@ -11,7 +11,7 @@ app.config(function ($routeProvider) {
         controller: 'AboutCtrl'
     }).when('/contact', {
         templateUrl: 'views/contact.html',
-        controller: ''
+        controller: 'ContactCtrl'
     }).otherwise({
         templateUrl: '404.html',
         controller: ''

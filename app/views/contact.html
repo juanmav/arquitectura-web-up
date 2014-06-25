@@ -1,1 +1,25 @@
-<p>This is the contact view.</p>
+<div class="container">
+    <form role="form">
+        {{contact}}
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input ng-model="contact.name" type="text" class="form-control" id="name"
+                   placeholder="Ingrese Nombre">
+        </div>
+        <div class="form-group">
+            <label for="surname">Apellido</label>
+            <input ng-model="contact.surname" type="text" class="form-control" id="surname"
+                   placeholder="Ingrese Apellido">
+        </div>
+        <div class="form-group">
+            <label for="mail">eMail</label>
+            <input ng-model="contact.email" type="email" class="form-control" id="mail"
+                   placeholder="Ingrese Correo Electronico" required="true">
+        </div>
+        <div class="form-group">
+            <label for="body">Mensaje</label>
+            <textarea ng-model="contact.message" class="form-control" rows="3" required id="body"></textarea>
+        </div>
+        <button ng-click="enviar()" type="submit" class="btn btn-default">Enviar</button>
+    </form>
+</div>
