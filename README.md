@@ -13,6 +13,7 @@ UP - Arquitectura Web
 
 - TODO
 
+### De que es.
 
 ### Clonar el proyecto
 
@@ -43,3 +44,9 @@ En este caso el servicio va a ser una conexion a una rest api
 ```sh
 yo angular:service contact-service
 ```
+
+Traer cambios
+/dev/ArqWeb$ git pull
+
+Arrancar proyecto
+grunt serve
