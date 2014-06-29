@@ -19,13 +19,13 @@ rails scaffold Droplet nombre:string ip:string active:boolean
 ### Hacer funcionar esto :
 
 ** Dependencias Necesarias:
-    - nodejs
-    - NPM
-    - Grunt
-    - Bower
-    - Git
-    - Ruby
-    - Ruby on Rails
+- nodejs
+- NPM
+- Grunt
+- Bower
+- Git
+- Ruby
+- Ruby on Rails
 
 ### Como tener el proyecto en la maquina de desarrollo?
 
