@@ -72,6 +72,27 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
         myOtherModal.$promise.then(myOtherModal.show);
     }
 
+    $scope.remove = function (drop) {
+        $scope.drop = drop;
+
+        // confirm dialog
+        alertify.confirm("¿Está seguro que desea eliminar el servidor seleccionado?", function (e) {
+            if (e) {
+                toaster.pop('success', "Remove Server", "Se borró el servidor " + drop.id);
+                DropletService.remove(drop, function(success){
+                    toaster.pop('success', "Drop", "Droplet creado con exito!");
+                    $scope.refresh();
+                }, function(error){
+                    toaster.pop('error', "Drop", "No se pudo salvar el Droplet");
+                });
+            } else {
+                toaster.pop('success', "Remove Server", "Se conserva el servidor " + drop.id);
+            }
+        });
+
+        $scope.refresh();
+    }
+
     $scope.save = function(drop){
         console.log('aca salvo');
         console.log(drop);
@@ -86,7 +107,7 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
 
         } else {
             console.log('Nuevo');
-            DropletService.save(drop, function(success){
+                DropletService.save(drop, function(success){
                 toaster.pop('success', "Drop", "Droplet creado con exito!");
                 $scope.refresh();
             }, function(error){
