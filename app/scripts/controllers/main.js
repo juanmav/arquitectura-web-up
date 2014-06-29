@@ -76,7 +76,7 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
         $scope.drop = drop;
 
         // confirm dialog
-        alertify.confirm("¿Está seguro que desea eliminar el servidor seleccionado?", function (e) {
+        alertify.confirm("¿Está seguro que desea eliminar el servidor " + drop.id + "?", function (e) {
             if (e) {
                 toaster.pop('success', "Remove Server", "Se eliminó el servidor " + drop.id);
                 DropletService.delete(drop.id, function(success){
@@ -91,6 +91,37 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
         });
 
         $scope.refresh();
+    }
+
+    $scope.turnOn = function(drop){
+        $scope.drop = drop;
+        if (drop.status) {
+            toaster.pop('error', "Turning on Server", "El servidor " + drop.id + " ya se encuentra encendido");
+            return false;
+        }
+
+        toaster.pop('success', "Turning on Server", "Encendiendo servidor: " + drop.id);
+        DropletService.turnOn(drop.id, function(success){
+            toaster.pop('success', "Drop", "Droplet encendido con exito!");
+            $scope.refresh();
+        }, function(error){
+            toaster.pop('error', "Drop", "No se pudo encender el Droplet");
+        });
+    }
+
+    $scope.turnOff = function(drop){
+        $scope.drop = drop;
+        if (!drop.status) {
+            toaster.pop('error', "Turning off Server", "El servidor " + drop.id + " ya se encuentra apagado");
+            return false;
+        }
+        toaster.pop('success', "Turning off Server", "Apagando servidor: " + drop.id);
+        DropletService.turnOff(drop.id, function(success){
+            toaster.pop('success', "Drop", "Droplet apagado con exito!");
+            $scope.refresh();
+        }, function(error){
+            toaster.pop('error', "Drop", "No se pudo apagar el Droplet");
+        });
     }
 
     $scope.save = function(drop){
