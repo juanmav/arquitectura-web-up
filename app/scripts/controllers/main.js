@@ -78,12 +78,12 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
         // confirm dialog
         alertify.confirm("¿Está seguro que desea eliminar el servidor seleccionado?", function (e) {
             if (e) {
-                toaster.pop('success', "Remove Server", "Se borró el servidor " + drop.id);
-                DropletService.remove(drop, function(success){
-                    toaster.pop('success', "Drop", "Droplet creado con exito!");
+                toaster.pop('success', "Remove Server", "Se eliminó el servidor " + drop.id);
+                DropletService.delete(drop.id, function(success){
+                    toaster.pop('success', "Drop", "Droplet eliminado con exito!");
                     $scope.refresh();
                 }, function(error){
-                    toaster.pop('error', "Drop", "No se pudo salvar el Droplet");
+                    toaster.pop('error', "Drop", "No se pudo eliminar el Droplet");
                 });
             } else {
                 toaster.pop('success', "Remove Server", "Se conserva el servidor " + drop.id);
@@ -113,21 +113,6 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
             }, function(error){
                 toaster.pop('error', "BackEnd", "No se pudo crear el Droplet");
             });
-        }
-    }
-    $scope.remove = function(drop){
-        console.log('aca Elimino');
-        console.log(drop);
-        $scope.drop = drop;
-        if (confirm('Seguro que quiere borrar?')) {
-            DropletService.delete(drop.id, function(success){
-                toaster.pop('success', "Drop", "Droplet eliminado con exito!");
-                $scope.refresh();
-            }, function(error){
-                toaster.pop('error', "Drop", "No se pudo eliminar el Droplet");
-            });
-        } else {
-            // Do nothing!
         }
     }
 });
