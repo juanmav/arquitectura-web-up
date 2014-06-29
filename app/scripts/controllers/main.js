@@ -115,4 +115,19 @@ app.controller('MainCtrl', function ($scope, DropletService, toaster, $modal) {
             });
         }
     }
+    $scope.remove = function(drop){
+        console.log('aca Elimino');
+        console.log(drop);
+        $scope.drop = drop;
+        if (confirm('Seguro que quiere borrar?')) {
+            DropletService.delete(drop.id, function(success){
+                toaster.pop('success', "Drop", "Droplet eliminado con exito!");
+                $scope.refresh();
+            }, function(error){
+                toaster.pop('error', "Drop", "No se pudo eliminar el Droplet");
+            });
+        } else {
+            // Do nothing!
+        }
+    }
 });
