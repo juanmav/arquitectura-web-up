@@ -1,3 +1,76 @@
-<p>
-    Lanzar: <button ng-click="pop()" class="btn btn-success">Show a Toaster</button>
-</p>
+<article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+    <a name="user-content-up---arquitectura-web-" class="anchor" href="#up---arquitectura-web-" aria-hidden="true"><span class="octicon octicon-link"></span></a>UP - Arquitectura Web </h1>
+
+    <h3>
+        <a name="user-content-rese%C3%B1a-del-proyecto" class="anchor" href="#rese%C3%B1a-del-proyecto" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reseña del Proyecto</h3>
+
+    <p>En este proyecto construimos una aplicación que al conectarse a la URL del servidor se descarga la aplicación en
+        el navegador del cliente web.
+        Esta aplicación fue construida en HTML, CCS utilizando AngulasJS (Java Script). Utilizamos AngularStrap que es la
+        librería que adapta TwitterBoostrap a AngularJS entre otras dependencias (las dependencias estan descriptas en
+        el archivo bower.JSON)</p>
+
+    <p>El cliente Web para obtener los datos se conecta al back end a travez de una REST appi desarrollada en Ruby on Rails,
+        este backend fue generado con los comandos de scaffolding de Rails.
+        Ej:</p>
+
+    <div class="highlight highlight-sh"><pre>rails scaffold Droplet nombre:string ip:string active:boolean
+</pre></div>
+
+    <h3>
+        <a name="user-content-hacer-funcionar-esto-" class="anchor" href="#hacer-funcionar-esto-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hacer funcionar esto :</h3>
+
+    <p>** Dependencias Necesarias:</p>
+
+    <ul class="task-list">
+        <li>nodejs</li>
+        <li>NPM</li>
+        <li>Grunt</li>
+        <li>Bower</li>
+        <li>Git</li>
+        <li>Ruby</li>
+        <li>Ruby on Rails</li>
+    </ul><h3>
+        <a name="user-content-como-tener-el-proyecto-en-la-maquina-de-desarrollo" class="anchor" href="#como-tener-el-proyecto-en-la-maquina-de-desarrollo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Como tener el proyecto en la maquina de desarrollo?</h3>
+
+    <ul class="task-list">
+        <li>Clonar el proyecto</li>
+    </ul><div class="highlight highlight-sh"><pre>git clone https://github.com/juanmav/arquitectura-web-up.git ArqWeb
+<span class="nb">cd </span>ArqWeb
+grunt serve
+</pre></div>
+
+    <ul class="task-list">
+        <li>Como generar las Vistas?
+            Linea de Comando dentro de la carpeta del proyecto </li>
+    </ul><div class="highlight highlight-sh"><pre>yo angular:view contact
+</pre></div>
+
+    <p>En este comando se esta generando la Vista de Contact</p>
+
+    <ul class="task-list">
+        <li>Como generar los Controladores?
+            Linea de Comando dentro de la carpeta del proyecto </li>
+    </ul><div class="highlight highlight-sh"><pre>yo angular:controller contact
+</pre></div>
+
+    <p>En este comando se esta generando el Controlador para la vista de Contact</p>
+
+    <ul class="task-list">
+        <li>
+            <p>Como configurar las rutas de la aplicacion?</p>
+
+            <blockquote>
+                <p>Dentro del archivo app.js se encuentran las rutas de la aplicacion con sus respectivos controllers.</p>
+            </blockquote>
+        </li>
+        <li><p>Generando un Servicio
+            En este caso el servicio va a ser una conexion a una rest api</p></li>
+    </ul><div class="highlight highlight-sh"><pre>yo angular:service contact-service
+</pre></div>
+
+    <ul class="task-list">
+        <li>Traer cambios
+            Este comando trae los cambios realizados en Git</li>
+    </ul><div class="highlight highlight-sh"><pre>/dev/ArqWeb<span class="nv">$ </span>git pull
+</pre></div></article>

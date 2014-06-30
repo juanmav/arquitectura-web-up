@@ -9,7 +9,15 @@ app.service('DropletService', function ($resource) {
             isArray : true
         },
         update : {
-            method : 'PUT'
+            method: 'PUT',
+            params: {id: '@id'},
+            url : 'http://' + window.location.hostname + ':3000/servers/:id.json'
+        },
+        delete : {
+            method: 'DELETE',
+            params: {id: '@id'},
+            url : 'http://' + window.location.hostname + ':3000/servers/:id.json'
         }
+
     });
 });

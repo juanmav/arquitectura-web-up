@@ -7,7 +7,8 @@
         "angular-sanitize": "1.2.15",
         "angular-route": "1.2.15",
         "angular-strap": "master",
-        "AngularJS-Toaster" : "0.4.5"
+        "AngularJS-Toaster" : "0.4.5",
+        "alertify.js" : "0.3.10"
     },
     "devDependencies": {
         "angular-mocks": "1.2.15",
