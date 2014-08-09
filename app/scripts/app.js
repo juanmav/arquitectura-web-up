@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('arqWebApp',
-    [ 'ngResource', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap', 'toaster']);
+    [ 'ngResource', 'ngSanitize', 'ngRoute', 'mgcrea.ngStrap', 'toaster', 'timer']);
 app.config(function ($routeProvider) {
     $routeProvider.when('/main', {
         templateUrl: 'views/main.html',

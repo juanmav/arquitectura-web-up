@@ -147,7 +147,6 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
     }
 
     $scope.newFlight = function () {
-
         console.log($scope.flights.length);
         var flight = {};
         flight.day_order = $scope.flights.length + 1;
@@ -221,6 +220,14 @@ app.controller('FlightsCtrl', function ($scope, SkydiverService, PilotService, P
     $scope.report = function () {
         // Pre-fetch an external template populated with a custom scope
         var myOtherModal = $modal({template: 'views/report-skydiver-flight.tpl.modal.html', show: false});
+        // Show when some event occurs (use $promise property to ensure the template has been loaded)
+        myOtherModal.$promise.then(myOtherModal.show);
+    }
+
+    $scope.printToday = function (){
+        console.log('imprimir hoy');
+        // Pre-fetch an external template populated with a custom scope
+        var myOtherModal = $modal({template: 'views/print-flights.tpl.modal.html', show: false});
         // Show when some event occurs (use $promise property to ensure the template has been loaded)
         myOtherModal.$promise.then(myOtherModal.show);
     }

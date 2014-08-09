@@ -1,0 +1,32 @@
+<div class="modal" ng-controller="PrintFlightsCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Reporte Diario de Cobros: {{date}}</h4>
+            </div>
+            <div id="printable" class="modal-body">
+                <table ng-class="{'print-break' : (($index + 1) % 4) == 0}" class="table table-bordered" ng-repeat="flight in flights">
+                    <thead>
+                    <tr>
+                        <th>ID: {{flight.id}}</th>
+                        <th>Alturaa: {{flight.altitude}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="skydiver in flight.skydivers">
+                        <td >
+                            {{skydiver.name}}
+                        </td>
+                        <td >
+                            $____________
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
